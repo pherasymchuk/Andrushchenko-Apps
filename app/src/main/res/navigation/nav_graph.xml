@@ -14,7 +14,14 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_sharedPreferencesActivity"
+            app:destination="@id/sharedPreferencesActivity" />
     </fragment>
+    <!--    <activity-->
+    <!--        android:id="@+id/SharedPreferencesActivity"-->
+    <!--        android:name="com.herasymchuk.andrushchenko.apps.SharedPreferencesActivity"-->
+    <!--        android:label="Shared Preferences" />-->
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.herasymchuk.andrushchenko.SecondFragment"
@@ -25,4 +32,9 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <activity
+        android:id="@+id/sharedPreferencesActivity"
+        android:name="com.herasymchuk.andrushchenko.apps.SharedPreferencesActivity"
+        android:label="Shared Preferences"
+        tools:layout="@layout/activity_shared_preferences" />
 </navigation>
