@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/recycler_view"
     android:layout_width="match_parent"
+    android:clipToPadding="false"
     android:layout_height="match_parent"
     tools:context=".apps.recyclerview.RecyclerViewActivity">
 
