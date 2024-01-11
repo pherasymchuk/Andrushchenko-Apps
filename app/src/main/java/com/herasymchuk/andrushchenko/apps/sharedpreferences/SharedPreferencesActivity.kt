@@ -1,4 +1,4 @@
-package com.herasymchuk.andrushchenko.apps
+package com.herasymchuk.andrushchenko.apps.sharedpreferences
 
 import android.content.SharedPreferences
 import android.os.Bundle

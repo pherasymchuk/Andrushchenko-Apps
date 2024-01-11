@@ -12,29 +12,21 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
             android:id="@+id/action_FirstFragment_to_sharedPreferencesActivity"
             app:destination="@id/sharedPreferencesActivity" />
-    </fragment>
-    <!--    <activity-->
-    <!--        android:id="@+id/SharedPreferencesActivity"-->
-    <!--        android:name="com.herasymchuk.andrushchenko.apps.SharedPreferencesActivity"-->
-    <!--        android:label="Shared Preferences" />-->
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.herasymchuk.andrushchenko.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_recyclerViewActivity"
+            app:destination="@id/recyclerViewActivity" />
     </fragment>
+
     <activity
         android:id="@+id/sharedPreferencesActivity"
-        android:name="com.herasymchuk.andrushchenko.apps.SharedPreferencesActivity"
+        android:name="com.herasymchuk.andrushchenko.apps.sharedpreferences.SharedPreferencesActivity"
         android:label="Shared Preferences"
         tools:layout="@layout/activity_shared_preferences" />
+    <activity
+        android:id="@+id/recyclerViewActivity"
+        android:name="com.herasymchuk.andrushchenko.apps.recyclerview.RecyclerViewActivity"
+        android:label="activity_recycler_view"
+        tools:layout="@layout/activity_recycler_view" />
 </navigation>
