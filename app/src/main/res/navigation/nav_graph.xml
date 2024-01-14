@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_recyclerViewActivity"
             app:destination="@id/recyclerViewActivity" />
+        <action
+            android:id="@+id/action_FirstFragment_to_handlerLooperActivity"
+            app:destination="@id/handlerLooperActivity" />
     </fragment>
 
     <activity
@@ -29,4 +32,9 @@
         android:name="com.herasymchuk.andrushchenko.apps.recyclerview.RecyclerViewActivity"
         android:label="activity_recycler_view"
         tools:layout="@layout/activity_recycler_view" />
+    <activity
+        android:id="@+id/handlerLooperActivity"
+        android:name="com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity"
+        android:label="activity_handler_looper"
+        tools:layout="@layout/activity_handler_looper" />
 </navigation>
