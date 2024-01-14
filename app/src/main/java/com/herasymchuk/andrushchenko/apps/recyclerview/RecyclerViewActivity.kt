@@ -55,7 +55,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         usersService.removeListener(usersListener)
     }
 
-    private val usersListener: UsersListener = {
+    private val usersListener: UsersListener = UsersListener {
         adapter.users = it
     }
 }

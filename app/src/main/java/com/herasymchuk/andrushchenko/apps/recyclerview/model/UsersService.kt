@@ -3,11 +3,11 @@ package com.herasymchuk.andrushchenko.apps.recyclerview.model
 import com.github.javafaker.Faker
 import java.util.Collections
 
-typealias UsersListener = (users: List<User>) -> Unit
+//typealias UsersListener = (users: List<User>) -> Unit
 
-//fun interface UsersListener {
-//    fun listen(users: List<User>): Unit
-//}
+fun interface UsersListener {
+    fun onUsersUpdated(users: List<User>)
+}
 
 class UsersService {
 
@@ -51,7 +51,7 @@ class UsersService {
 
     fun addListener(listener: UsersListener) {
         listeners.add(listener)
-        listener.invoke(users)
+        listener.onUsersUpdated(users)
     }
 
     fun removeListener(listener: UsersListener) {
@@ -59,7 +59,7 @@ class UsersService {
     }
 
     private fun notifyChanges() {
-        listeners.forEach { it.invoke(users) }
+        listeners.forEach { it.onUsersUpdated(users) }
     }
 
     companion object {
