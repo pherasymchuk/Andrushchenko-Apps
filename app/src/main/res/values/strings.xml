@@ -7,4 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="current_value_some_value">Current value: %1$s</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
+    <string name="remove">Remove</string>
 </resources>

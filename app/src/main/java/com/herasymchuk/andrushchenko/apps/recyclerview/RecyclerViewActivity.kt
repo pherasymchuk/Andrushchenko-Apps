@@ -1,12 +1,14 @@
 package com.herasymchuk.andrushchenko.apps.recyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.herasymchuk.andrushchenko.App
 import com.herasymchuk.andrushchenko.R
+import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
 import com.herasymchuk.andrushchenko.databinding.ActivityRecyclerViewBinding
@@ -19,15 +21,33 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge(SystemBarStyle.dark(resources.getColor(R.color.dark_gray_semi_transparent)))
+        enableEdgeToEdge(SystemBarStyle.dark(getColor(R.color.dark_gray_semi_transparent)))
         binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.root.applyInsets(top = true, left = true, right = true, bottom = true)
-        adapter = UsersAdapter()
+        adapter = UsersAdapter(object : UserActionListener {
+            override fun onUserMove(user: User, moveBy: Int) {
+                usersService.moveUser(user, moveBy)
+            }
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+            override fun onUserDelete(user: User) {
+                usersService.deleteUser(user)
+            }
+
+            override fun onUserDetails(user: User) {
+                Toast.makeText(this@RecyclerViewActivity, "User: ${user.name}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
+
         binding.recyclerView.adapter = adapter
         usersService.addListener(usersListener)
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this, DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     override fun onDestroy() {
