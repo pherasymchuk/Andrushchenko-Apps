@@ -8,4 +8,8 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
+
+    <style name="Theme.HandlerLooper.Base" parent="Theme.AndruschenkoApps">
+        <item name="materialButtonStyle">@style/HandlerLooperButtonStyle</item>
+    </style>
 </resources>

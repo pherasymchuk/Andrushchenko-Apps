@@ -17,21 +17,24 @@ import kotlin.random.Random
 class HandlerLooperActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHandlerLooperBinding
     private val handler = Handler(Looper.getMainLooper())
-    private val token = Any()
+//    private val token = Any()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityHandlerLooperBinding.inflate(layoutInflater)
+        binding.root.applyInsets(top = true, left = true, right = true, bottom = true)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         binding.root.forEach {
             if (it is Button) it.setOnClickListener(universalButtonListener)
         }
-        binding.root.applyInsets(top = true, left = true, right = true, bottom = true)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        this.finish()
         return true
     }
 
@@ -46,6 +49,14 @@ class HandlerLooperActivity : AppCompatActivity() {
 
     private fun showToast() {
         Toast.makeText(this, R.string.hello, Toast.LENGTH_SHORT).show()
+    }
+
+    private val nextRandomColorRunnable = Runnable {
+        nextRandomColor()
+    }
+
+    private val showToastRunnable = Runnable {
+        showToast()
     }
 
     private val universalButtonListener = View.OnClickListener {
@@ -65,12 +76,15 @@ class HandlerLooperActivity : AppCompatActivity() {
                     handler.postDelayed({ nextRandomColor() }, DELAY)
 
                 R.id.randomColorTokenDelayedButton ->
-                    handler.postDelayed({ toggleTestButtonState() }, token, DELAY)
+                    handler.postDelayed(nextRandomColorRunnable, DELAY)
 
                 R.id.showToastButton ->
-                    handler.postDelayed({ showToast() }, token, DELAY)
+                    handler.postDelayed(showToastRunnable, DELAY)
 
-                R.id.cancelButton -> handler.removeCallbacksAndMessages(token)
+                R.id.cancelButton -> {
+                    handler.removeCallbacks(nextRandomColorRunnable)
+                    handler.removeCallbacks(showToastRunnable)
+                }
 
             }
         }.start()

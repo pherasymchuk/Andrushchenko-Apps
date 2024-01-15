@@ -12,8 +12,11 @@ class AppItemRepository {
             AppItem("RecyclerView") {
                 it.navigate(R.id.action_FirstFragment_to_recyclerViewActivity)
             },
-            AppItem("Handler, Looper, Main Thread") {
+            AppItem("1 Handler, Looper, Main Thread") {
                 it.navigate(R.id.action_FirstFragment_to_handlerLooperActivity)
+            },
+            AppItem("2 Handler, Looper, Main Thread") {
+                it.navigate(R.id.action_FirstFragment_to_handlerLooperActivity2)
             }
         )
     }

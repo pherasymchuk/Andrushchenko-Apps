@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_handlerLooperActivity"
             app:destination="@id/handlerLooperActivity" />
+        <action
+            android:id="@+id/action_FirstFragment_to_handlerLooperActivity2"
+            app:destination="@id/handlerLooperActivity2" />
     </fragment>
 
     <activity
@@ -37,4 +40,8 @@
         android:name="com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity"
         android:label="activity_handler_looper"
         tools:layout="@layout/activity_handler_looper" />
+    <activity
+        android:id="@+id/handlerLooperActivity2"
+        android:name="com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity2"
+        android:label="HandlerLooperActivity2" />
 </navigation>
