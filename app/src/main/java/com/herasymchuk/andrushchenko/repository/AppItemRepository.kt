@@ -17,6 +17,8 @@ class AppItemRepository {
             },
             AppItem("2 Handler, Looper, Main Thread") {
                 it.navigate(R.id.action_FirstFragment_to_handlerLooperActivity2)
+            }, AppItem("Custom View by combining layouts") {
+                it.navigate(R.id.action_FirstFragment_to_customViewCombineActivity)
             }
         )
     }

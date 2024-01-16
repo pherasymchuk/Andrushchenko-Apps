@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_handlerLooperActivity2"
             app:destination="@id/handlerLooperActivity2" />
+        <action
+            android:id="@+id/action_FirstFragment_to_customViewCombineActivity"
+            app:destination="@id/customViewCombineActivity" />
     </fragment>
 
     <activity
@@ -44,4 +47,9 @@
         android:id="@+id/handlerLooperActivity2"
         android:name="com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity2"
         android:label="HandlerLooperActivity2" />
+    <activity
+        android:id="@+id/customViewCombineActivity"
+        android:name="com.herasymchuk.andrushchenko.apps.customview.CustomViewCombineActivity"
+        android:label="activity_custom_view_combine"
+        tools:layout="@layout/activity_custom_view_combine" />
 </navigation>
