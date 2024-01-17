@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_negative"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="0dp"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toStartOf="@id/space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FFB6B6"
+        app:rippleColor="?colorPrimary"
         tools:text="Negative button" />
 
     <Space
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_negative"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_positive"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

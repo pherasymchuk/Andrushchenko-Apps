@@ -17,10 +17,11 @@
 
     <com.herasymchuk.andrushchenko.apps.customview.BottomButtonsView
         android:layout_width="0dp"
-        app:bottomNegativeButtonText="Cancel"
-        app:bottomPositiveButtonText="Ok"
-        app:bottomProgressMode="false"
         android:layout_height="wrap_content"
+        app:bottomPositiveButtonBackground="?colorPrimary"
+        app:bottomNegativeButtonText="Cancel"
+        app:bottomPositiveButtonText="Apply"
+        app:bottomProgressMode="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
