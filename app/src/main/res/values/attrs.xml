@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomButtonsView">
+        <attr name="bottomPositiveButtonText" format="string" />
+        <attr name="bottomPositiveButtonBackground" format="color" />
+
+        <attr name="bottomNegativeButtonText" format="string" />
+        <attr name="bottomNegativeButtonBackground" format="color" />
+
+        <attr name="bottomProgressMode" format="boolean" />
+    </declare-styleable>
+</resources>

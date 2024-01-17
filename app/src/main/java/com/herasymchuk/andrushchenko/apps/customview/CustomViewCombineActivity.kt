@@ -17,5 +17,12 @@ class CustomViewCombineActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.root.applyInsets(top = true, left = true, right = true, bottom = true)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 }

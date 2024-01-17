@@ -9,4 +9,6 @@
     <style name="HandlerLooperButtonStyle" parent="Widget.Material3.Button">
         <item name="minWidth">200dp</item>
     </style>
+
+    <style name="CustomViewsButtonsStyle" parent="Widget.Material3.Button"></style>
 </resources>

@@ -6,9 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".apps.customview.CustomViewCombineActivity">
 
-    <include
-        layout="@layout/part_buttons"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Custom View Combining" />
+
+    <com.herasymchuk.andrushchenko.apps.customview.BottomButtonsView
+        android:layout_width="0dp"
+        app:bottomNegativeButtonText="Cancel"
+        app:bottomPositiveButtonText="Ok"
+        app:bottomProgressMode="false"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
