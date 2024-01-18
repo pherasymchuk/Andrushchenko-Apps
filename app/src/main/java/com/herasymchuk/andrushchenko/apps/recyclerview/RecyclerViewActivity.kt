@@ -2,12 +2,10 @@ package com.herasymchuk.andrushchenko.apps.recyclerview
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.herasymchuk.andrushchenko.App
-import com.herasymchuk.andrushchenko.R
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
@@ -21,10 +19,16 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge(SystemBarStyle.dark(getColor(R.color.dark_gray_semi_transparent)))
+        enableEdgeToEdge()
+
         binding = ActivityRecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.root.applyInsets(top = true, left = true, right = true, bottom = true)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.root.applyInsets(top = true, left = true, right = true)
+        binding.recyclerView.applyInsets(bottom = true)
+
         adapter = UsersAdapter(object : UserActionListener {
             override fun onUserMove(user: User, moveBy: Int) {
                 usersService.moveUser(user, moveBy)
@@ -38,7 +42,6 @@ class RecyclerViewActivity : AppCompatActivity() {
                 Toast.makeText(this@RecyclerViewActivity, "User: ${user.name}", Toast.LENGTH_SHORT)
                     .show()
             }
-
         })
 
         binding.recyclerView.adapter = adapter
@@ -48,6 +51,11 @@ class RecyclerViewActivity : AppCompatActivity() {
                 this, DividerItemDecoration.VERTICAL
             )
         )
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return super.onSupportNavigateUp()
     }
 
     override fun onDestroy() {
