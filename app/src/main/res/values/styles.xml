@@ -10,5 +10,16 @@
         <item name="minWidth">200dp</item>
     </style>
 
-    <style name="CustomViewsButtonsStyle" parent="Widget.Material3.Button"></style>
+    <style name="ConcreteBottomButtonsStyle">
+        <item name="bottomPositiveButtonBackground">#9C27B0</item>
+    </style>
+
+    <style name="CustomViewsButtonsStyle">
+        <item name="bottomPositiveButtonBackground">#DA4D00</item>
+    </style>
+
+    <style name="DefaultMyButtonsStyle">
+        <item name="bottomPositiveButtonBackground">#880000</item>
+    </style>
+
 </resources>

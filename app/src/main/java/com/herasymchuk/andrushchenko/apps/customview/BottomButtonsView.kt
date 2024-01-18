@@ -31,8 +31,8 @@ import com.herasymchuk.andrushchenko.databinding.PartButtonsBinding
 class BottomButtonsView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0,
+    defStyleAttr: Int = R.attr.bottomButtonsStyle,
+    defStyleRes: Int = R.style.DefaultMyButtonsStyle,
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
     private val binding: PartButtonsBinding
 

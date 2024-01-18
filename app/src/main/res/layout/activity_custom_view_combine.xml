@@ -16,10 +16,11 @@
         app:title="Custom View Combining" />
 
     <com.herasymchuk.andrushchenko.apps.customview.BottomButtonsView
+        style="@style/ConcreteBottomButtonsStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:bottomPositiveButtonBackground="?colorPrimary"
         app:bottomNegativeButtonText="Cancel"
+        app:bottomPositiveButtonBackground="?colorPrimary"
         app:bottomPositiveButtonText="Apply"
         app:bottomProgressMode="false"
         app:layout_constraintBottom_toBottomOf="parent"

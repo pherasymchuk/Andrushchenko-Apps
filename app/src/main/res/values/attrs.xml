@@ -9,4 +9,6 @@
 
         <attr name="bottomProgressMode" format="boolean" />
     </declare-styleable>
+
+    <attr name="bottomButtonsStyle" format="reference" />
 </resources>
