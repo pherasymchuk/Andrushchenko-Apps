@@ -1,6 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.AndruschenkoApps" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#AD2727</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
@@ -12,11 +13,7 @@
         <item name="materialButtonStyle">@style/HandlerLooperButtonStyle</item>
     </style>
 
-    <style name="Theme.CustomViews.Base" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">#CD5C1F</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    <style name="Theme.CustomViews.Base" parent="Base.Theme.AndruschenkoApps">
         <item name="bottomButtonsStyle">@style/CustomViewsButtonsStyle</item>
     </style>
 </resources>
