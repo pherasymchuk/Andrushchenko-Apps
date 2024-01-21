@@ -4,29 +4,17 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Color
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.herasymchuk.andrushchenko.R
 import com.herasymchuk.andrushchenko.databinding.PartButtonsBinding
 
-//class BottomButtonsView(
-//    context: Context,
-//    attrs: AttributeSet?,
-//    defStyleAttr: Int,
-//    defStyleRes: Int,
-//) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
-//
-//    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(
-//        context,
-//        attrs,
-//        defStyleAttr,
-//        0
-//    )
-//
-//    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-//    constructor(context: Context) : this(context, null)
-
+fun interface BottomButtonsOnClickListener {
+    fun onClick()
+}
 
 class BottomButtonsView @JvmOverloads constructor(
     context: Context,
@@ -92,12 +80,16 @@ class BottomButtonsView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    fun setPositiveButtonListener(listener: OnClickListener) {
-        binding.btnPositive.setOnClickListener(listener)
+    fun setPositiveButtonListener(listener: BottomButtonsOnClickListener) {
+        binding.btnPositive.setOnClickListener {
+            listener.onClick()
+        }
     }
 
-    fun setNegativeButtonListener(listener: OnClickListener) {
-        binding.btnNegative.setOnClickListener(listener)
+    fun setNegativeButtonListener(listener: BottomButtonsOnClickListener) {
+        binding.btnNegative.setOnClickListener {
+            listener.onClick()
+        }
     }
 
     fun setPositiveButtonText(text: String) {
@@ -106,5 +98,44 @@ class BottomButtonsView @JvmOverloads constructor(
 
     fun setNegativeButtonText(text: String) {
         binding.btnNegative.text = text
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState() ?: BaseSavedState.EMPTY_STATE
+        val savedState = SavedState(superState)
+        savedState.positiveButtonText = binding.btnPositive.text.toString()
+        savedState.negativeButtonText = binding.btnNegative.text.toString()
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState: SavedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+        binding.btnPositive.text = savedState.positiveButtonText
+        binding.btnNegative.text = savedState.negativeButtonText
+    }
+
+    class SavedState : BaseSavedState {
+        var positiveButtonText = ""
+        var negativeButtonText = ""
+
+        constructor(superState: Parcelable) : super(superState)
+        constructor(source: Parcel) : super(source) {
+            positiveButtonText = source.readString() ?: positiveButtonText
+            negativeButtonText = source.readString() ?: negativeButtonText
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeString(positiveButtonText)
+            out.writeString(negativeButtonText)
+        }
+
+        companion object CREATOR : Parcelable.Creator<SavedState> {
+            override fun createFromParcel(source: Parcel): SavedState = SavedState(source)
+
+            override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
+
+        }
     }
 }
