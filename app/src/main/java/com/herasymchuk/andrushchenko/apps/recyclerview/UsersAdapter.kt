@@ -61,12 +61,10 @@ class UsersAdapter(
         val position = users.indexOfFirst { it.id == user.id }
 
         PopupMenu(context, v).apply {
-            menu.add(0, ID_MOVE_UP, Menu.NONE, context.getString(R.string.move_up)).let {
-                it.isEnabled = position > 0
-            }
-            menu.add(0, ID_MOVE_DOWN, Menu.NONE, context.getString(R.string.move_down)).let {
-                it.isEnabled = position < users.lastIndex
-            }
+            menu.add(0, ID_MOVE_UP, Menu.NONE, context.getString(R.string.move_up))
+                .isEnabled = (position > 0)
+            menu.add(0, ID_MOVE_DOWN, Menu.NONE, context.getString(R.string.move_down))
+                .isEnabled = (position < users.lastIndex)
             menu.add(0, ID_REMOVE, Menu.NONE, context.getString(R.string.remove))
 
             setOnMenuItemClickListener {

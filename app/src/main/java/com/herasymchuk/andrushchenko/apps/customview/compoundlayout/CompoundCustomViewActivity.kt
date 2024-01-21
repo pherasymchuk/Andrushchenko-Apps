@@ -1,18 +1,18 @@
-package com.herasymchuk.andrushchenko.apps.customview
+package com.herasymchuk.andrushchenko.apps.customview.compoundlayout
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.herasymchuk.andrushchenko.databinding.ActivityCustomViewCombineBinding
+import com.herasymchuk.andrushchenko.databinding.ActivityCompoundCustomViewBinding
 import com.herasymchuk.andrushchenko.insets.applyInsets
 
-class CustomViewCombineActivity : AppCompatActivity() {
+class CompoundCustomViewActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCustomViewCombineBinding
+    private lateinit var binding: ActivityCompoundCustomViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCustomViewCombineBinding.inflate(layoutInflater)
+        binding = ActivityCompoundCustomViewBinding.inflate(layoutInflater)
         enableEdgeToEdge()
         setContentView(binding.root)
 

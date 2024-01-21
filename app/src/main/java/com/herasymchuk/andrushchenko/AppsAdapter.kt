@@ -2,24 +2,20 @@ package com.herasymchuk.andrushchenko
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.herasymchuk.andrushchenko.databinding.AppItemBinding
 import com.herasymchuk.andrushchenko.model.AppItem
 
-class AppsAdapter(private val apps: List<AppItem>, private val navController: NavController) :
+class AppsAdapter(private val apps: List<AppItem>) :
     RecyclerView.Adapter<AppsAdapter.AppsViewHolder>() {
 
     class AppsViewHolder(
         private val itemLayout: AppItemBinding,
-        private val navController: NavController,
-    ) : RecyclerView.ViewHolder(
-        itemLayout.root
-    ) {
+    ) : RecyclerView.ViewHolder(itemLayout.root) {
         fun bind(appItem: AppItem) {
             itemLayout.appName.text = appItem.name
             itemLayout.btnOpenApp.setOnClickListener {
-                appItem.onButtonClick(navController)
+                appItem.onButtonClick()
             }
         }
     }
@@ -28,7 +24,7 @@ class AppsAdapter(private val apps: List<AppItem>, private val navController: Na
         AppsViewHolder(
             AppItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            ), navController
+            )
         )
 
     override fun getItemCount(): Int {

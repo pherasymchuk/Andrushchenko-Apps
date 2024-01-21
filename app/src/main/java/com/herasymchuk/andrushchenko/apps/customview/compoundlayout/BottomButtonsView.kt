@@ -1,4 +1,4 @@
-package com.herasymchuk.andrushchenko.apps.customview
+package com.herasymchuk.andrushchenko.apps.customview.compoundlayout
 
 import android.content.Context
 import android.content.res.ColorStateList
