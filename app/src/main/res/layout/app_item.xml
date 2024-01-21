@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/app_name"
-            style="@style/TextAppearance.Material3.TitleLarge"
+            style="@style/TextAppearance.Material3.TitleSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
