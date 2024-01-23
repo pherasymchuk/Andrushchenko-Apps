@@ -27,9 +27,7 @@ class AppsAdapter(private val apps: List<AppItem>) :
             )
         )
 
-    override fun getItemCount(): Int {
-        return apps.size
-    }
+    override fun getItemCount(): Int = apps.size
 
     override fun onBindViewHolder(holder: AppsViewHolder, position: Int) {
         holder.bind(apps[position])

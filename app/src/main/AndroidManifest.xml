@@ -17,9 +17,13 @@
         android:theme="@style/Theme.AndruschenkoApps"
         tools:targetApi="31">
         <activity
+            android:name=".apps.customview.fromscratch.CustomViewFromScratchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CustomViewsFromScratch.Base" />
+        <activity
             android:name=".apps.customview.compoundlayout.CompoundCustomViewActivity"
             android:exported="false"
-            android:theme="@style/Theme.CustomViews.Base" />
+            android:theme="@style/Theme.CompoundCustomViews.Base" />
         <activity
             android:name=".apps.handlerlooper.HandlerLooperActivity2"
             android:exported="false" />
@@ -35,6 +39,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:theme="@style/MainActivityTheme"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

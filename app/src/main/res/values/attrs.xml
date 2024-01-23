@@ -11,4 +11,12 @@
     </declare-styleable>
 
     <attr name="bottomButtonsStyle" format="reference" />
+
+    <declare-styleable name="TicTacToeView">
+        <attr name="player1Color" format="color" />
+        <attr name="player2Color" format="color" />
+        <attr name="gridColor" format="color" />
+    </declare-styleable>
+
+    <attr name="ticTackToeFieldStyle" format="reference" />
 </resources>

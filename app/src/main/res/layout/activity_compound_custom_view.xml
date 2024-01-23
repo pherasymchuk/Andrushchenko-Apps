@@ -15,6 +15,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Custom View Combining" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_buttons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:srcCompat="@drawable/android_on_the_road_nb" />
+
     <com.herasymchuk.andrushchenko.apps.customview.compoundlayout.BottomButtonsView
         android:id="@+id/bottom_buttons"
         style="@style/ConcreteBottomButtonsStyle"

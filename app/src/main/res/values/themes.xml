@@ -2,9 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AndruschenkoApps" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">#AD2727</item>
+        <item name="colorPrimaryVariant">#B2E03333</item>
+        <item name="colorSurfaceContainer">#FDFDFD</item>
+        <item name="colorSurface">#F2F2F2</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+
+    <style name="MainActivityTheme" parent="Base.Theme.AndruschenkoApps">
+        <item name="android:statusBarColor">?colorSurfaceContainer</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
     </style>
 
     <style name="Theme.AndruschenkoApps" parent="Base.Theme.AndruschenkoApps" />
@@ -13,7 +21,11 @@
         <item name="materialButtonStyle">@style/HandlerLooperButtonStyle</item>
     </style>
 
-    <style name="Theme.CustomViews.Base" parent="Base.Theme.AndruschenkoApps">
+    <style name="Theme.CompoundCustomViews.Base" parent="Base.Theme.AndruschenkoApps">
         <item name="bottomButtonsStyle">@style/CustomViewsButtonsStyle</item>
+    </style>
+
+    <style name="Theme.CustomViewsFromScratch.Base" parent="Base.Theme.AndruschenkoApps">
+        <item name="ticTackToeFieldStyle">@style/GlobalTicTacToeFieldStyle</item>
     </style>
 </resources>

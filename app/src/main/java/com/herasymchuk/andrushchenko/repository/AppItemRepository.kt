@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import com.herasymchuk.andrushchenko.apps.customview.compoundlayout.CompoundCustomViewActivity
+import com.herasymchuk.andrushchenko.apps.customview.fromscratch.CustomViewFromScratchActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity2
 import com.herasymchuk.andrushchenko.apps.recyclerview.RecyclerViewActivity
@@ -27,7 +28,10 @@ class AppItemRepository(private val context: Context) {
         },
         AppItem("Compound Custom View") {
             startApp(CompoundCustomViewActivity::class)
-        }
+        },
+        AppItem("Custom View from scratch") {
+            startApp(CustomViewFromScratchActivity::class)
+        },
     )
 
     private fun <T : Activity> startApp(appClass: KClass<T>) {
