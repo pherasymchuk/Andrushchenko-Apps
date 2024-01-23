@@ -3,16 +3,17 @@ package com.herasymchuk.andrushchenko
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.divider.MaterialDividerItemDecoration
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.herasymchuk.andrushchenko.databinding.ActivityMainBinding
 import com.herasymchuk.andrushchenko.insets.applyInsets
-import com.herasymchuk.andrushchenko.repository.AppItemRepository
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -21,17 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.root.applyInsets(top = true, left = true, right = true)
 
+        val navHostFrament: NavHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFrament.navController
         setSupportActionBar(binding.toolbar)
-
-        with(binding.content.recyclerView) {
-            layoutManager = object : LinearLayoutManager(context) {
-                override fun canScrollVertically(): Boolean = false
-            }
-            val decoration = MaterialDividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL)
-            decoration.dividerThickness = 2
-            addItemDecoration(decoration)
-            setHasFixedSize(true)
-            adapter = AppsAdapter(AppItemRepository(this@MainActivity).getAllApps())
+        binding.bottomNavigation.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.toolbar.title = destination.label
         }
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu_apps">
+
+    <fragment
+        android:id="@+id/menu_apps"
+        android:name="com.herasymchuk.andrushchenko.AppsFragment"
+        android:label="Andrushchenko Apps"
+        tools:layout="@layout/fragment_apps" />
+    <fragment
+        android:id="@+id/menu_roadmaps"
+        android:name="com.herasymchuk.andrushchenko.RoadmapFragment"
+        android:label="Roadmaps"
+        tools:layout="@layout/fragment_roadmap" />
+    <fragment
+        android:id="@+id/menu_settings"
+        android:name="com.herasymchuk.andrushchenko.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>

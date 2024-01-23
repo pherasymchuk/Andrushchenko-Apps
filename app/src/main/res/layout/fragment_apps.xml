@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    tools:context=".AppsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,9 +29,9 @@
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.Material3.CardView.Elevated"
             android:layout_width="match_parent"
-            android:layout_marginBottom="16dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="?colorSurfaceContainer"
             app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"

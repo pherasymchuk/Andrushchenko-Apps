@@ -27,7 +27,7 @@
     <string name="ok">OK</string>
     <string name="apps_list_caption">Apps from the YouTube course</string>
     <string name="apps_navigation_title">Apps</string>
-    <string name="roadmap_navigation_title">Roadmap</string>
+    <string name="roadmap_navigation_title">Roadmaps</string>
     <string name="settings_navigation_title">Settings</string>
 
     <plurals name="seconds">
@@ -38,4 +38,8 @@
         <item quantity="many">%1$d seconds</item>
         <item quantity="other">%1$d seconds</item>
     </plurals>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
