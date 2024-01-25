@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.herasymchuk.andrushchenko.App
+import com.herasymchuk.andrushchenko.MainApplication
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
@@ -15,7 +15,7 @@ import com.herasymchuk.andrushchenko.insets.applyInsets
 class RecyclerViewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecyclerViewBinding
     private lateinit var adapter: UsersAdapter
-    private val usersService: UsersService get() = (application as App).usersService
+    private val usersService: UsersService get() = (application as MainApplication).usersService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

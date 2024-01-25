@@ -39,9 +39,7 @@
     </style>
 
     <style name="ThemeOverlay.AndrushchenkoApps.BottomNavigationView" parent="">
-        <item name="colorSurface">#FF3A3A</item>
-        <!--        <item name="colorOnSurfaceVariant">#9C27B0</item>-->
-        <item name="itemIconTint">#03A9F4</item>
+        <item name="colorSurface">?colorPrimaryVariant</item>
     </style>
 
     <style name="App.AndrushchenkoApps.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
