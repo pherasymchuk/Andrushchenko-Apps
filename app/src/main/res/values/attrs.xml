@@ -19,6 +19,7 @@
     </declare-styleable>
 
     <attr name="ticTackToeFieldStyle" format="reference" />
+
     <declare-styleable name="FullscreenAttrs">
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />

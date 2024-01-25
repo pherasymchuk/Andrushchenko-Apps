@@ -22,16 +22,6 @@
         <item name="bottomPositiveButtonBackground">#880000</item>
     </style>
 
-    <style name="DefaultTicTacToeFieldStyle">
-        <item name="player1Color">#008800</item>
-        <item name="player2Color">#880000</item>
-        <item name="gridColor">#dfdfdf</item>
-    </style>
-
-    <style name="GlobalTicTacToeFieldStyle" parent="DefaultTicTacToeFieldStyle">
-        <item name="player1Color">#3F51B5</item>
-    </style>
-
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="materialThemeOverlay">
             @style/ThemeOverlay.AndrushchenkoApps.BottomNavigationView
@@ -50,5 +40,18 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+
+    <!--TicTacToe Custom View styles-->
+    <style name="DefaultTicTacToeFieldStyle">
+        <item name="player1Color">#008800</item>
+        <item name="player2Color">#880000</item>
+        <item name="gridColor">#dfdfdf</item>
+    </style>
+
+    <style name="GlobalTicTacToeFieldStyle" parent="DefaultTicTacToeFieldStyle">
+        <item name="player1Color">#3F51B5</item>
+    </style>
+    <!---->
+
 
 </resources>

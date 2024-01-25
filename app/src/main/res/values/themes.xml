@@ -13,6 +13,8 @@
     <style name="MainActivityTheme" parent="Base.Theme.AndruschenkoApps">
         <item name="android:statusBarColor">?colorSurfaceContainer</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="Theme.AndruschenkoApps" parent="Base.Theme.AndruschenkoApps" />
@@ -25,12 +27,16 @@
         <item name="bottomButtonsStyle">@style/CustomViewsButtonsStyle</item>
     </style>
 
-    <style name="Theme.CustomViewsFromScratch.Base" parent="Base.Theme.AndruschenkoApps">
-        <item name="ticTackToeFieldStyle">@style/GlobalTicTacToeFieldStyle</item>
-    </style>
-
     <style name="ThemeOverlay.AndrushchenkoApps.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
+
+    <!--TicTacToe Theme-->
+    <style name="Theme.CustomViewsFromScratch.Base" parent="Base.Theme.AndruschenkoApps">
+        <item name="ticTackToeFieldStyle">@style/GlobalTicTacToeFieldStyle</item>
+    </style>
+    <!---->
+
+
 </resources>
