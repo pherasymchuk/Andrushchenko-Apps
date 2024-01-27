@@ -89,9 +89,6 @@ class TicTacToeView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    /**
-     * Все ещё можно договорится с компоновщиком о размере
-     */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val minWidth = suggestedMinimumWidth + paddingLeft + paddingRight
         val minHeight = suggestedMinimumHeight + paddingTop + paddingBottom
@@ -125,10 +122,6 @@ class TicTacToeView @JvmOverloads constructor(
         setMeasuredDimension(width, height)
     }
 
-    /**
-     * Вызивается после метода onMeasure,
-     * когда компоновщик уже назначил определенный размер компоненту
-     */
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         updateViewSizes()
