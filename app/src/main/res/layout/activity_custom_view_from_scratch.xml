@@ -14,5 +14,9 @@
         android:layout_height="wrap_content"
         app:title="Custom View From Scratch" />
 
+    <com.herasymchuk.andrushchenko.apps.customview.fromscratch.TicTacToeView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary" />
 
 </LinearLayout>
