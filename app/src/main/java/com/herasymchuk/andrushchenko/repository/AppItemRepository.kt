@@ -2,7 +2,6 @@ package com.herasymchuk.andrushchenko.repository
 
 import android.content.Context
 import com.herasymchuk.andrushchenko.apps.customview.compoundlayout.CompoundCustomViewActivity
-import com.herasymchuk.andrushchenko.apps.customview.fromscratch.CustomViewFromScratchActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity2
 import com.herasymchuk.andrushchenko.apps.recyclerview.RecyclerViewActivity
@@ -27,8 +26,8 @@ class AppItemRepository(private val context: Context) {
         AppItem("Compound Custom View") {
             context.startApp(CompoundCustomViewActivity::class)
         },
-        AppItem("Custom View from scratch") {
-            context.startApp(CustomViewFromScratchActivity::class)
-        },
+//        AppItem("Custom View from scratch") {
+//            context.startApp(CustomViewFromScratchActivity::class)
+//        },
     )
 }
