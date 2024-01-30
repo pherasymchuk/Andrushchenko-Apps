@@ -42,4 +42,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="random_field">Random field</string>
+
+    <string name="current_player">Current player: %s</string>
+    <string name="number_of_cells_in_a_row_needed_to_win">To win: %d</string>
 </resources>
