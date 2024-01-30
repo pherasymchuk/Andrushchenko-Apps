@@ -18,7 +18,7 @@
         <attr name="gridColor" format="color" />
     </declare-styleable>
 
-    <attr name="ticTackToeFieldStyle" format="reference" />
+    <attr name="ticTacToeFieldStyle" format="reference" />
 
     <declare-styleable name="FullscreenAttrs">
         <attr name="fullscreenBackgroundColor" format="color" />
