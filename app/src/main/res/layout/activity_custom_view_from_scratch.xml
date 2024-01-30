@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".apps.customview.fromscratch.CustomViewFromScratchActivity">
+    tools:context=".apps.customview.fromscratch.ui.CustomViewFromScratchActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

@@ -2,7 +2,7 @@ package com.herasymchuk.andrushchenko.repository
 
 import android.content.Context
 import com.herasymchuk.andrushchenko.apps.customview.compoundlayout.CompoundCustomViewActivity
-import com.herasymchuk.andrushchenko.apps.customview.fromscratch.CustomViewFromScratchActivity
+import com.herasymchuk.andrushchenko.apps.customview.fromscratch.ui.CustomViewFromScratchActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity
 import com.herasymchuk.andrushchenko.apps.handlerlooper.HandlerLooperActivity2
 import com.herasymchuk.andrushchenko.apps.recyclerview.RecyclerViewActivity
