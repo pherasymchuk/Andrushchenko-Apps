@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AndruschenkoApps"
         tools:targetApi="31">
         <activity
+            android:name=".repository.CustomViewFromScratchActivity"
+            android:exported="false" />
+        <activity
             android:name=".apps.customview.compoundlayout.CompoundCustomViewActivity"
             android:exported="false"
             android:theme="@style/Theme.CompoundCustomViews.Base" />
@@ -35,8 +38,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/MainActivityTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
