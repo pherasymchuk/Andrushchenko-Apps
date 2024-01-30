@@ -34,7 +34,7 @@
 
     <!--TicTacToe Theme-->
     <style name="Theme.CustomViewsFromScratch.Base" parent="Base.Theme.AndruschenkoApps">
-        <item name="ticTackToeFieldStyle">@style/GlobalTicTacToeFieldStyle</item>
+        <item name="ticTacToeFieldStyle">@style/GlobalTicTacToeFieldStyle</item>
     </style>
     <!---->
 

@@ -1,7 +1,7 @@
 package com.herasymchuk.andrushchenko.apps.customview.fromscratch.tictactoegame
 
 fun interface FieldObserver {
-    fun onFieldChanged(field: List<List<Cell>>)
+    fun onFieldChanged(ticTacToe: TicTacToe)
 }
 
 interface ObservableField {
@@ -9,15 +9,21 @@ interface ObservableField {
     fun unsubscribe(observer: FieldObserver)
 }
 
-abstract class TicTacToe(protected val rows: Int, protected val columns: Int) {
+abstract class TicTacToe(val rows: Int, val columns: Int) : ObservableField {
+
     abstract fun getCell(position: TicTacToe.Position): Cell
 
     abstract fun setCell(position: TicTacToe.Position, cell: Cell): Boolean
     abstract val field: List<List<Cell>>
 
-    class Base(row: Int, columns: Int) : TicTacToe(row, columns), ObservableField {
+    class Base(row: Int, columns: Int) : TicTacToe(row, columns) {
         override val field: MutableList<MutableList<Cell>> = MutableList(rows) { MutableList(columns) { Cell.EMPTY } }
         private val observers: MutableSet<FieldObserver> = mutableSetOf()
+
+        init {
+            if (row < 3 || columns < 3) throw IllegalArgumentException("Game field is too small, should not be less than 3")
+            if (row > 20 || columns > 20) throw IllegalArgumentException("Game field is too big, should be more than 20")
+        }
 
         override fun getCell(position: TicTacToe.Position): Cell {
             return field[position.row][position.column]
@@ -25,7 +31,7 @@ abstract class TicTacToe(protected val rows: Int, protected val columns: Int) {
 
         override fun setCell(position: TicTacToe.Position, cell: Cell): Boolean {
             field[position.row][position.column] = cell
-            observers.forEach { it.onFieldChanged(field) }
+            observers.forEach { it.onFieldChanged(this) }
             return true
         }
 
