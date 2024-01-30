@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AndruschenkoApps"
         tools:targetApi="31">
         <activity
-            android:name=".repository.CustomViewFromScratchActivity"
+            android:name=".apps.customview.fromscratch.CustomViewFromScratchActivity"
             android:exported="false" />
         <activity
             android:name=".apps.customview.compoundlayout.CompoundCustomViewActivity"

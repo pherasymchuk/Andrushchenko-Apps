@@ -1,4 +1,4 @@
-package com.herasymchuk.andrushchenko.repository
+package com.herasymchuk.andrushchenko.apps.customview.fromscratch
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
