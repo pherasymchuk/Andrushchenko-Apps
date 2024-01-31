@@ -12,16 +12,27 @@ interface ObservableField {
 abstract class TicTacToe(val rows: Int, val columns: Int) : ObservableField {
     abstract val field: List<List<Cell>>
 
+    abstract fun isFull(): Boolean
     abstract fun getCell(position: TicTacToe.Position): Cell
     abstract fun setCell(position: TicTacToe.Position, cell: Cell): Boolean
 
     class Base(row: Int, columns: Int) : TicTacToe(row, columns) {
         override val field: MutableList<MutableList<Cell>> = MutableList(rows) { MutableList(columns) { Cell.EMPTY } }
-        private val observers: MutableSet<FieldObserver> = mutableSetOf()
+
+        val observers: MutableSet<FieldObserver> = mutableSetOf()
 
         init {
             if (row < 3 || columns < 3) throw IllegalArgumentException("Game field is too small, should not be less than 3")
             if (row > 20 || columns > 20) throw IllegalArgumentException("Game field is too big, should be more than 20")
+        }
+
+        override fun isFull(): Boolean {
+            for (column in this.field) {
+                for (cell in column) {
+                    if (cell == Cell.EMPTY) return false
+                }
+            }
+            return true
         }
 
         override fun getCell(position: TicTacToe.Position): Cell {
