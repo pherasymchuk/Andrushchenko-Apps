@@ -7,12 +7,14 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.updatePadding
 import com.herasymchuk.andrushchenko.R
 import com.herasymchuk.andrushchenko.apps.customview.fromscratch.tictactoegame.Cell
 import com.herasymchuk.andrushchenko.apps.customview.fromscratch.tictactoegame.FieldObserver
 import com.herasymchuk.andrushchenko.apps.customview.fromscratch.tictactoegame.TicTacToe
+import com.herasymchuk.andrushchenko.apps.customview.fromscratch.ui.TicTacToeView.OnCellClickedListener
 import com.herasymchuk.andrushchenko.utils.withTypedArray
 
 class TicTacToeView @JvmOverloads constructor(
@@ -22,14 +24,45 @@ class TicTacToeView @JvmOverloads constructor(
     defStyleRes: Int = R.style.DefaultTicTacToeFieldStyle
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
     private var ticTacToe: TicTacToe = TicTacToe.Base(3, 3)
+        set(value) {
+            field.unsubscribe(onFieldChangeListener)
+            field = value
+            field.subscribe(onFieldChangeListener)
+            updateViewSizes()
+            requestLayout()
+            invalidate()
+        }
     private var player1Color = Color.parseColor(PLAYER1_DEFAULT_COLOR)
+        set(value) {
+            field = value
+            player1Paint.color = field
+        }
     private var player2Color = Color.parseColor(PLAYER2_DEFAULT_COLOR)
+        set(value) {
+            field = value
+            player2Paint.color = field
+        }
     private var gridColor = Color.parseColor(GRID_DEFAULT_COLOR)
+        set(value) {
+            field = value
+            gridPaint.color = field
+        }
     private val fieldRectF: RectF = RectF()
     private val cellRectF: RectF = RectF()
     private var cellSize: Float = 0f
     private var cellPadding: Float = 0f
+    private var currentRow: Int = -1
+        set(value) {
+            field = value
+            invalidate()
+        }
+    private var currentColumn: Int = -1
+        set(value) {
+            field = value
+            invalidate()
+        }
     private val onFieldChangeListener = FieldObserver { ticTacToe = it }
+    var onCellClickedListener = OnCellClickedListener { _, _, _ -> }
     private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = gridColor
         style = Paint.Style.STROKE
@@ -44,7 +77,7 @@ class TicTacToeView @JvmOverloads constructor(
         style = Paint.Style.STROKE
         strokeWidth = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            3f,
+            4f,
             resources.displayMetrics
         )
     }
@@ -53,7 +86,7 @@ class TicTacToeView @JvmOverloads constructor(
         style = Paint.Style.STROKE
         strokeWidth = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            3f,
+            4f,
             resources.displayMetrics
         )
     }
@@ -165,7 +198,7 @@ class TicTacToeView @JvmOverloads constructor(
     private fun drawCells(canvas: Canvas) {
         for (row in 0 until ticTacToe.rows) {
             for (column in 0 until ticTacToe.columns) {
-                val cell = ticTacToe.getCell(ticTacToe.Position(row, column))
+                val cell: Cell = ticTacToe.getCell(ticTacToe.Position(row, column))
                 if (cell == Cell.USER_1) {
                     drawPlayer1(canvas, row, column)
                 } else if (cell == Cell.USER_2) {
@@ -188,10 +221,59 @@ class TicTacToeView @JvmOverloads constructor(
 
     private fun getCellRect(row: Int, column: Int): RectF {
         cellRectF.left = fieldRectF.left + column * cellSize + cellPadding
-        cellRectF.right = cellRectF.left + cellSize - cellPadding * 2
         cellRectF.top = fieldRectF.top + row * cellSize + cellPadding
+        cellRectF.right = cellRectF.left + cellSize - cellPadding * 2
         cellRectF.bottom = cellRectF.top + cellSize - cellPadding * 2
         return cellRectF
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        return when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                updateClickedCell(event)
+                true
+            }
+
+            MotionEvent.ACTION_UP -> {
+                return performClick()
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                true
+            }
+
+            else -> false
+        }
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        if (currentColumn >= 0 && currentColumn < ticTacToe.columns && currentRow >= 0 && currentRow < ticTacToe.rows) {
+            onCellClickedListener.onClick(currentRow, currentColumn, ticTacToe)
+            return true
+        }
+        return false
+    }
+
+    private fun updateClickedCell(event: MotionEvent) {
+        val row: Int = getClickedRow(event)
+        val column: Int = getClickedColumn(event)
+        if (row >= 0 && row < ticTacToe.rows && column >= 0 && column < ticTacToe.columns) {
+            if (row != currentRow || column != currentColumn) {
+                currentRow = row
+                currentColumn = column
+                invalidate()
+            }
+        }
+
+    }
+
+    private fun getClickedRow(event: MotionEvent): Int = ((event.y - fieldRectF.top) / cellSize).toInt()
+
+    private fun getClickedColumn(event: MotionEvent): Int = ((event.x - fieldRectF.left) / cellSize).toInt()
+
+    fun interface OnCellClickedListener {
+        fun onClick(row: Int, column: Int, ticTacToe: TicTacToe)
     }
 
     companion object {

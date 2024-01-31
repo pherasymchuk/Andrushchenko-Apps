@@ -10,11 +10,10 @@ interface ObservableField {
 }
 
 abstract class TicTacToe(val rows: Int, val columns: Int) : ObservableField {
+    abstract val field: List<List<Cell>>
 
     abstract fun getCell(position: TicTacToe.Position): Cell
-
     abstract fun setCell(position: TicTacToe.Position, cell: Cell): Boolean
-    abstract val field: List<List<Cell>>
 
     class Base(row: Int, columns: Int) : TicTacToe(row, columns) {
         override val field: MutableList<MutableList<Cell>> = MutableList(rows) { MutableList(columns) { Cell.EMPTY } }

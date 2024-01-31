@@ -17,7 +17,11 @@
         tools:title="Custom View From Scratch" />
 
     <com.herasymchuk.andrushchenko.apps.customview.fromscratch.ui.TicTacToeView
+        android:id="@+id/ticTacToe"
         android:layout_width="0dp"
+        android:padding="0dp"
+        app:player1Color="@color/light_blue_900"
+        app:player2Color="@android:color/holo_green_light"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
