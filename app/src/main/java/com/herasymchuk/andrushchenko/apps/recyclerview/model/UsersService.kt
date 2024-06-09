@@ -3,8 +3,6 @@ package com.herasymchuk.andrushchenko.apps.recyclerview.model
 import com.github.javafaker.Faker
 import java.util.Collections
 
-//typealias UsersListener = (users: List<User>) -> Unit
-
 fun interface UsersListener {
     fun onUsersUpdated(users: List<User>)
 }
@@ -31,6 +29,7 @@ class UsersService {
     fun deleteUser(user: User) {
         val indexToRemove = users.indexOfFirst { it.id == user.id }
         if (indexToRemove != -1) {
+            users = ArrayList(users)
             users.removeAt(indexToRemove)
         }
         notifyChanges()
@@ -41,7 +40,17 @@ class UsersService {
         if (oldIndex == -1) return
         val newIndex = oldIndex + moveBy
         if (newIndex < 0 || newIndex > users.lastIndex) return
+        users = ArrayList(users)
         Collections.swap(users, oldIndex, newIndex)
+        notifyChanges()
+    }
+
+    fun fireUser(user: User) {
+        val index: Int = users.indexOfFirst { it.id == user.id }
+        if (index == -1) return
+        val updatedUser = user.copy(company = "")
+        users = ArrayList(users)
+        users[index] = updatedUser
         notifyChanges()
     }
 

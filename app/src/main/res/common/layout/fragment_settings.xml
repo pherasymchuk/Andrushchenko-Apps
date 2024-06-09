@@ -10,6 +10,7 @@
     <ImageView
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:importantForAccessibility="no"
         android:src="@drawable/android_on_the_road1" />
 
     <TextView
@@ -17,6 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:lines="1"
-        android:text="Settings will be added later" />
+        android:text="@string/settings_will_be_added_later" />
 
 </LinearLayout>

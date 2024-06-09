@@ -1,50 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Andrushchenko Apps</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Apps List</string>
-    <string name="run">Run</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="current_value_some_value">Current value: %1$s</string>
-    <string name="move_up">Move up</string>
-    <string name="move_down">Move down</string>
-    <string name="remove">Remove</string>
-
-    <string name="post_to_main_thread">Post to Main Thread:</string>
-    <string name="enable_disable_button">Enable/Disable Button</string>
-    <string name="random_color">Random Color</string>
-    <string name="post_delayed">Post delayed (2 sec.)</string>
-    <string name="post_delayed_with_token">Post delayed with token (2 sec.)</string>
-    <string name="test_button">Test Button</string>
-    <string name="show_toast">Show Toast</string>
-    <string name="hello">Hello</string>
-    <string name="handler_level_1">Handler, level 1</string>
-    <string name="handler_level_2">Handler, level 2</string>
-    <string name="level1">Level 1</string>
-    <string name="level2">Level 2</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="apps_list_caption">Apps from the YouTube course</string>
-    <string name="apps_navigation_title">Apps</string>
-    <string name="roadmap_navigation_title">Roadmaps</string>
-    <string name="settings_navigation_title">Settings</string>
-
-    <plurals name="seconds">
-        <item quantity="zero">%1$d seconds</item>
-        <item quantity="one">%1$d second</item>
-        <item quantity="two">%1$d seconds</item>
-        <item quantity="few">%1$d seconds</item>
-        <item quantity="many">%1$d seconds</item>
-        <item quantity="other">%1$d seconds</item>
-    </plurals>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="random_field">Random field</string>
-
-    <string name="current_player">Current player: %s</string>
-    <string name="number_of_cells_in_a_row_needed_to_win">To win: %d</string>
-    <string name="change_field_size">Change field size</string>
+    <string name="roadmaps_will_be_added_later">Roadmaps will be added later</string>
+    <string name="settings_will_be_added_later">Settings will be added later</string>
 </resources>

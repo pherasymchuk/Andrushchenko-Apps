@@ -15,20 +15,20 @@ class AppItemRepository(private val context: Context) {
         AppItem("Shared Preferences") {
             context.startApp(SharedPreferencesActivity::class)
         },
-        AppItem("RecyclerView") {
-            context.startApp(RecyclerViewActivity::class)
-        },
         AppItem("1 Handler, Looper, Main Thread") {
             context.startApp(HandlerLooperActivity::class)
         },
         AppItem("2 Handler, Looper, Main Thread") {
             context.startApp(HandlerLooperActivity2::class)
         },
+        AppItem("RecyclerView") {
+            context.startApp(RecyclerViewActivity::class)
+        },
         AppItem("Compound Custom View") {
             context.startApp(CompoundCustomViewActivity::class)
         },
         AppItem("Custom View from scratch") {
             context.startApp(CustomViewFromScratchActivity::class)
-        },
+        }
     )
 }

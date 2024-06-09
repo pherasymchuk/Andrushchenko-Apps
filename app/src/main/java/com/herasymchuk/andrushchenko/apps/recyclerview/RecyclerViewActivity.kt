@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.herasymchuk.andrushchenko.MainApplication
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
@@ -39,8 +41,11 @@ class RecyclerViewActivity : AppCompatActivity() {
             }
 
             override fun onUserDetails(user: User) {
-                Toast.makeText(this@RecyclerViewActivity, "User: ${user.name}", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(this@RecyclerViewActivity, "User: ${user.name}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onUserFire(user: User) {
+                usersService.fireUser(user)
             }
         })
 
@@ -51,6 +56,10 @@ class RecyclerViewActivity : AppCompatActivity() {
                 this, DividerItemDecoration.VERTICAL
             )
         )
+        val itemAnimator: RecyclerView.ItemAnimator? = binding.recyclerView.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -63,7 +72,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         usersService.removeListener(usersListener)
     }
 
-    private val usersListener: UsersListener = UsersListener {
-        adapter.users = it
+    private val usersListener = UsersListener {
+        adapter.updateUsers(it)
     }
 }
