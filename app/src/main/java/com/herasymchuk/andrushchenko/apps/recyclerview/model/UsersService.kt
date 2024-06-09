@@ -1,6 +1,7 @@
 package com.herasymchuk.andrushchenko.apps.recyclerview.model
 
 import com.github.javafaker.Faker
+import com.herasymchuk.andrushchenko.apps.recyclerview.UserNotFoundException
 import java.util.Collections
 
 fun interface UsersListener {
@@ -52,6 +53,14 @@ class UsersService {
         users = ArrayList(users)
         users[index] = updatedUser
         notifyChanges()
+    }
+
+    fun getDetailsById(id: Long): UserDetails {
+        val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
+        return UserDetails(
+            user,
+            Faker.instance().lorem().paragraphs(3).joinToString(separator = "\n\n")
+        )
     }
 
     fun addListener(listener: UsersListener) {
