@@ -39,7 +39,7 @@ android {
     sourceSets {
         getByName("main") {
             res {
-                srcDirs("src/main/res/recyclerview-diffutils", "src/main/res/common")
+                srcDirs("src/main/res/recyclerview", "src/main/res/common")
             }
         }
     }

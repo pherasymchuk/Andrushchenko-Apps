@@ -53,6 +53,7 @@
         android:layout_height="40dp"
         android:layout_marginEnd="4dp"
         android:background="?android:selectableItemBackgroundBorderless"
+        android:importantForAccessibility="no"
         android:padding="6dp"
         android:src="@drawable/ic_more"
         app:layout_constraintBottom_toBottomOf="parent"

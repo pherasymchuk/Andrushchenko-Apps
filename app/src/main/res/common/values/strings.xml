@@ -47,4 +47,7 @@
     <string name="change_field_size">Change field size</string>
     <string name="fire">Fire</string>
     <string name="unemployed">[Unemployed]</string>
+
+    <string name="roadmaps_will_be_added_later">Roadmaps will be added later</string>
+    <string name="settings_will_be_added_later">Settings will be added later</string>
 </resources>
