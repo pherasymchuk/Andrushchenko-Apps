@@ -1,5 +1,6 @@
 [versions]
 agp = "8.4.1"
+fragmentKtx = "1.7.1"
 javafaker = "1.0.2"
 junitJupiter = "5.10.2"
 kotlin = "2.0.0"
@@ -17,6 +18,7 @@ glide = "4.16.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 javafaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -33,3 +35,4 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }

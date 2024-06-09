@@ -36,10 +36,17 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            res {
+                srcDirs("src/main/res/recyclerview-diffutils", "src/main/res/common")
+            }
+        }
+    }
 }
 
 dependencies {
-
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
