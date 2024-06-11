@@ -53,6 +53,7 @@ class RecyclerViewActivity : AppCompatActivity(), Navigator {
 
     override fun showDetails(user: User) {
         supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
             .replace(R.id.fragment_container, UserDetailsFragment.newInstance(user.id))
             .commit()
     }
