@@ -9,13 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.herasymchuk.andrushchenko.R
+import com.herasymchuk.andrushchenko.apps.recyclerview.navigator
 import com.herasymchuk.andrushchenko.databinding.FragmentUserDetailsBinding
 
 class UserDetailsFragment : Fragment() {
     private lateinit var binding: FragmentUserDetailsBinding
-    private val viewModel: UserDetailsViewModel by viewModels<UserDetailsViewModel.Default>(
-        factoryProducer = UserDetailsViewModel::Factory
-    )
+    private val viewModel: UserDetailsViewModel by viewModels<UserDetailsViewModel.Default> {
+        UserDetailsViewModel.Factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +47,8 @@ class UserDetailsFragment : Fragment() {
 
         binding.deleteButton.setOnClickListener {
             viewModel.deleteUser()
-            TODO("Not yet implemented")
+            navigator().toast(R.string.user_has_been_deleted)
+            navigator().goBack()
         }
         return binding.root
     }

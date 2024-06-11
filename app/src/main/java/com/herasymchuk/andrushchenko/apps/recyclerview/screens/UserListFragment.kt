@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.herasymchuk.andrushchenko.apps.recyclerview.UserActionListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.UsersAdapter
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
+import com.herasymchuk.andrushchenko.apps.recyclerview.navigator
 import com.herasymchuk.andrushchenko.databinding.FragmentUserListBinding
 import com.herasymchuk.andrushchenko.insets.applyInsets
 
@@ -39,7 +40,7 @@ class UserListFragment : Fragment() {
             }
 
             override fun onUserDetails(user: User) {
-
+                navigator().showDetails(user)
             }
 
             override fun onUserFire(user: User) {

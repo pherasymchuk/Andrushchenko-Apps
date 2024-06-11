@@ -1,17 +1,20 @@
 package com.herasymchuk.andrushchenko.apps.recyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.herasymchuk.andrushchenko.MainApplication
 import com.herasymchuk.andrushchenko.R
+import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
+import com.herasymchuk.andrushchenko.apps.recyclerview.screens.UserDetailsFragment
 import com.herasymchuk.andrushchenko.apps.recyclerview.screens.UserListFragment
 import com.herasymchuk.andrushchenko.databinding.ActivityRecyclerViewBinding
 import com.herasymchuk.andrushchenko.insets.applyInsets
 
-class RecyclerViewActivity : AppCompatActivity() {
+class RecyclerViewActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityRecyclerViewBinding
     private lateinit var adapter: UsersAdapter
     private val usersService: UsersService get() = (application as MainApplication).usersService
@@ -46,5 +49,19 @@ class RecyclerViewActivity : AppCompatActivity() {
 
     private val usersListener = UsersListener {
         adapter.updateUsers(it)
+    }
+
+    override fun showDetails(user: User) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, UserDetailsFragment.newInstance(user.id))
+            .commit()
+    }
+
+    override fun goBack() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
+    override fun toast(messageRes: Int) {
+        Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
     }
 }

@@ -41,7 +41,7 @@ abstract class UserDetailsViewModel(
 
     companion object {
         val Factory = viewModelFactory {
-            addInitializer(UserDetailsViewModel::class) {
+            addInitializer(Default::class) {
                 val application: MainApplication =
                     this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as MainApplication
                 Default(application.usersService)

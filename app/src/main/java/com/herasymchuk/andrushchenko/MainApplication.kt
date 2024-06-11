@@ -4,5 +4,5 @@ import android.app.Application
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
 
 class MainApplication : Application() {
-    val usersService: UsersService = UsersService()
+    val usersService: UsersService by lazy { UsersService() }
 }
