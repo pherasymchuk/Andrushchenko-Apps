@@ -21,7 +21,7 @@ class UsersService {
         loadUsers()
     }
 
-    private fun loadUsers(): Task<Unit> = DefaultTask {
+    fun loadUsers(): Task<Unit> = DefaultTask {
         val faker = Faker.instance()
         IMAGES.shuffle()
         users = (1..100).map {

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.herasymchuk.andrushchenko.R
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
+import com.herasymchuk.andrushchenko.apps.recyclerview.screens.UserListViewModel
 import com.herasymchuk.andrushchenko.databinding.ItemUserBinding
 
 interface UserActionListener {
@@ -21,15 +22,15 @@ interface UserActionListener {
 }
 
 class UsersDiffCallback(
-    private val oldList: List<User>,
-    private val newList: List<User>,
+    private val oldList: List<UserListViewModel.UserListItem>,
+    private val newList: List<UserListViewModel.UserListItem>,
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-        oldList[oldItemPosition].id == newList[newItemPosition].id
+        oldList[oldItemPosition].user.id == newList[newItemPosition].user.id
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldList[oldItemPosition] == newList[newItemPosition]
@@ -41,7 +42,7 @@ class UsersAdapter(
 
     private val users = UserList()
 
-    fun updateUsers(newUsers: List<User>) {
+    fun updateUsers(newUsers: List<UserListViewModel.UserListItem>) {
         users.update(newUsers) { usersDiffCallback ->
             val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(usersDiffCallback)
             diffResult.dispatchUpdatesTo(this)
@@ -49,7 +50,7 @@ class UsersAdapter(
     }
 
     class UserList {
-        private var users: List<User> = emptyList()
+        private var users: List<UserListViewModel.UserListItem> = emptyList()
 
         val size: Int
             get() = users.size
@@ -57,11 +58,11 @@ class UsersAdapter(
         val lastIndex: Int
             get() = users.lastIndex
 
-        operator fun get(index: Int): User = users[index]
+        operator fun get(index: Int): UserListViewModel.UserListItem = users[index]
 
-        fun indexOfFirst(predicate: (User) -> Boolean): Int = users.indexOfFirst(predicate)
+        fun indexOfFirst(predicate: (UserListViewModel.UserListItem) -> Boolean): Int = users.indexOfFirst(predicate)
 
-        fun update(newUsers: List<User>, onUsersUpdated: (UsersDiffCallback) -> Unit) {
+        fun update(newUsers: List<UserListViewModel.UserListItem>, onUsersUpdated: (UsersDiffCallback) -> Unit) {
             val usersDiffCallback = UsersDiffCallback(users, newUsers)
             users = newUsers
             onUsersUpdated(usersDiffCallback)
@@ -69,11 +70,11 @@ class UsersAdapter(
     }
 
     override fun onClick(v: View) {
-        val user = v.tag as User
+        val userListItem: UserListViewModel.UserListItem = v.tag as UserListViewModel.UserListItem
         if (v.id == R.id.more_image_view_button) {
             showPopupMenu(v)
         } else {
-            actionListener.onUserDetails(user)
+            actionListener.onUserDetails(userListItem.user)
         }
     }
 
@@ -81,7 +82,6 @@ class UsersAdapter(
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemUserBinding.inflate(inflater, parent, false)
 
-        binding.root.setOnClickListener(this)
         binding.moreImageViewButton.setOnClickListener(this)
 
         return UsersViewHolder(binding)
@@ -90,15 +90,41 @@ class UsersAdapter(
     override fun getItemCount(): Int = users.size
 
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
-        val user = users[position]
-        holder.itemView.tag = user
-        holder.bind(user)
+        val userListItem: UserListViewModel.UserListItem = users[position]
+        holder.itemView.tag = userListItem
+        val user = userListItem.user
+
+        with(holder.binding) {
+            userNameTextView.text = user.name
+            moreImageViewButton.tag = userListItem
+
+            if (userListItem.inProgress) {
+                moreImageViewButton.visibility = View.INVISIBLE
+                itemProgressBar.visibility = View.VISIBLE
+                root.setOnClickListener(null)
+            } else {
+                moreImageViewButton.visibility = View.VISIBLE
+                itemProgressBar.visibility = View.GONE
+                root.setOnClickListener(this@UsersAdapter)
+            }
+
+            userCompanyTextView.text = user.company
+            if (user.photo.isNotBlank()) {
+                Glide.with(photoImageView.context).load(user.photo).circleCrop()
+                    .placeholder(R.drawable.ic_user_avatar).error(R.drawable.ic_user_avatar)
+                    .into(photoImageView)
+            } else {
+                Glide.with(photoImageView.context).clear(photoImageView)
+                photoImageView.setImageResource(R.drawable.ic_user_avatar)
+            }
+        }
     }
 
     private fun showPopupMenu(v: View) {
         val context: Context = v.context
-        val user: User = v.tag as User
-        val position = users.indexOfFirst { it.id == user.id }
+        val userListItem: UserListViewModel.UserListItem = v.tag as UserListViewModel.UserListItem
+        val user = userListItem.user
+        val position = users.indexOfFirst { it.user.id == user.id }
 
         PopupMenu(context, v).apply {
             menu.add(0, ID_MOVE_UP, Menu.NONE, context.getString(R.string.move_up))
@@ -133,25 +159,7 @@ class UsersAdapter(
         }.show()
     }
 
-    class UsersViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
-            with(binding) {
-                moreImageViewButton.tag = user
-                userNameTextView.text = user.name
-                userCompanyTextView.text = user.company.ifBlank {
-                    itemView.context.getString(R.string.unemployed)
-                }
-                if (user.photo.isNotBlank()) {
-                    Glide.with(photoImageView.context).load(user.photo).circleCrop()
-                        .placeholder(R.drawable.ic_user_avatar).error(R.drawable.ic_user_avatar)
-                        .into(photoImageView)
-                } else {
-                    Glide.with(photoImageView.context).clear(photoImageView)
-                    photoImageView.setImageResource(R.drawable.ic_user_avatar)
-                }
-            }
-        }
-    }
+    class UsersViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
 
     companion object {
         private const val ID_MOVE_UP = 1

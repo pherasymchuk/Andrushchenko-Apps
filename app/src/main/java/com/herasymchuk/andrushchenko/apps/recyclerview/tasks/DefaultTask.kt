@@ -13,15 +13,15 @@ class DefaultTask<T>(
     private val callable: Callable<T>,
 ) : Task<T> {
     private val future: Future<*>
-    private var result: Result<T> = PendingResult()
+    private var result: Result<T> = Result.Pending()
 
     init {
         future = executorService.submit {
             result = try {
                 val data: T = callable.call()
-                SuccessResult(data)
+                Result.Success(data)
             } catch (e: Throwable) {
-                ErrorResult(e)
+                Result.Error(e)
             }
             notifyListeners()
         }
@@ -49,10 +49,10 @@ class DefaultTask<T>(
 
     override fun await(): T {
         future.get()
-        if (result is SuccessResult) {
-            return (result as SuccessResult<T>).data
+        if (result is Result.Success) {
+            return (result as Result.Success<T>).data
         } else {
-            throw (result as ErrorResult).exception
+            throw (result as Result.Error).exception
         }
     }
 
@@ -62,10 +62,10 @@ class DefaultTask<T>(
             val callback = this.valueCallback
             val errorCallback = this.errorCallback
 
-            if (result is SuccessResult && callback != null) {
+            if (result is Result.Success && callback != null) {
                 callback(result.data)
                 clear()
-            } else if (result is ErrorResult && errorCallback != null) {
+            } else if (result is Result.Error && errorCallback != null) {
                 errorCallback(result.exception)
                 clear()
             }

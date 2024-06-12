@@ -60,6 +60,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/item_progress_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/more_image_view_button"
+        app:layout_constraintEnd_toEndOf="@id/more_image_view_button"
+        app:layout_constraintStart_toStartOf="@id/more_image_view_button"
+        app:layout_constraintTop_toTopOf="@id/more_image_view_button" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
         android:layout_width="wrap_content"

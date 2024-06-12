@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.herasymchuk.andrushchenko.MainApplication
 import com.herasymchuk.andrushchenko.R
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.User
-import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersListener
 import com.herasymchuk.andrushchenko.apps.recyclerview.model.UsersService
 import com.herasymchuk.andrushchenko.apps.recyclerview.screens.UserDetailsFragment
 import com.herasymchuk.andrushchenko.apps.recyclerview.screens.UserListFragment
@@ -40,15 +39,6 @@ class RecyclerViewActivity : AppCompatActivity(), Navigator {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return super.onSupportNavigateUp()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        usersService.removeListener(usersListener)
-    }
-
-    private val usersListener = UsersListener {
-        adapter.updateUsers(it)
     }
 
     override fun showDetails(user: User) {
