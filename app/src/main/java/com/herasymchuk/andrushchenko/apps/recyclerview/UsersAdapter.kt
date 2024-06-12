@@ -61,7 +61,6 @@ class UsersAdapter(
      * @property users A list of [UserListViewModel.UserListItem] objects.
      * @property size The number of users in the list.
      * @property lastIndex The index of the last user in the list.
-     * @property onUsersUpdated A callback that is invoked when the users in the list are updated.
      */
     class UserList {
         private var users: List<UserListViewModel.UserListItem> = emptyList()
@@ -76,6 +75,9 @@ class UsersAdapter(
 
         fun indexOfFirst(predicate: (UserListViewModel.UserListItem) -> Boolean): Int = users.indexOfFirst(predicate)
 
+        /**
+         * @property onUsersUpdated A callback that is invoked when the users in the list are updated.
+         */
         fun update(newUsers: List<UserListViewModel.UserListItem>, onUsersUpdated: (UsersDiffCallback) -> Unit) {
             val usersDiffCallback = UsersDiffCallback(users, newUsers)
             users = newUsers

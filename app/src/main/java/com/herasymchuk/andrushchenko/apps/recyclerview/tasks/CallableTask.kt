@@ -19,7 +19,7 @@ private val handler = Handler(Looper.getMainLooper())
  * @param callable The callable task to execute.
  */
 class CallableTask<T>(
-    private val executorService: ExecutorService = Executors.newCachedThreadPool(),
+    executorService: ExecutorService = Executors.newCachedThreadPool(),
     private val callable: Callable<T>,
 ) : Task<T> {
     private val future: Future<*>
