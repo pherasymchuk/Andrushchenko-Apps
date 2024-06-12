@@ -2,7 +2,7 @@ package com.herasymchuk.andrushchenko.apps.recyclerview.model
 
 import com.github.javafaker.Faker
 import com.herasymchuk.andrushchenko.apps.recyclerview.UserNotFoundException
-import com.herasymchuk.andrushchenko.apps.recyclerview.tasks.DefaultTask
+import com.herasymchuk.andrushchenko.apps.recyclerview.tasks.CallableTask
 import com.herasymchuk.andrushchenko.apps.recyclerview.tasks.Task
 import java.util.Collections
 
@@ -10,6 +10,11 @@ fun interface UsersListener {
     fun invoke(users: List<User>)
 }
 
+/**
+ * [UsersService] is a class that provides methods for managing users.
+ * It includes methods for loading users, deleting users, moving users, firing users, and getting user details.
+ * The service also provides methods for adding and removing listeners to be notified of changes to the user list.
+ */
 class UsersService {
 
     private var users = mutableListOf<User>()
@@ -21,7 +26,12 @@ class UsersService {
         loadUsers()
     }
 
-    fun loadUsers(): Task<Unit> = DefaultTask {
+    /**
+     * Loads a list of users into the application.
+     *
+     * @return A task that represents the asynchronous operation.
+     */
+    fun loadUsers(): Task<Unit> = CallableTask {
         val faker = Faker.instance()
         IMAGES.shuffle()
         users = (1..100).map {
@@ -36,7 +46,7 @@ class UsersService {
         notifyChanges()
     }
 
-    fun deleteUser(user: User): Task<Unit> = DefaultTask {
+    fun deleteUser(user: User): Task<Unit> = CallableTask {
         val indexToRemove = users.indexOfFirst { it.id == user.id }
         if (indexToRemove != -1) {
             users = ArrayList(users)
@@ -45,28 +55,28 @@ class UsersService {
         notifyChanges()
     }
 
-    fun moveUser(user: User, moveBy: Int): Task<Unit> = DefaultTask {
+    fun moveUser(user: User, moveBy: Int): Task<Unit> = CallableTask {
         val oldIndex = users.indexOfFirst { it.id == user.id }
-        if (oldIndex == -1) return@DefaultTask
+        if (oldIndex == -1) return@CallableTask
         val newIndex = oldIndex + moveBy
-        if (newIndex < 0 || newIndex > users.lastIndex) return@DefaultTask
+        if (newIndex < 0 || newIndex > users.lastIndex) return@CallableTask
         users = ArrayList(users)
         Collections.swap(users, oldIndex, newIndex)
         notifyChanges()
     }
 
-    fun fireUser(user: User) = DefaultTask {
+    fun fireUser(user: User) = CallableTask {
         val index: Int = users.indexOfFirst { it.id == user.id }
-        if (index == -1) return@DefaultTask
+        if (index == -1) return@CallableTask
         val updatedUser = user.copy(company = "")
         users = ArrayList(users)
         users[index] = updatedUser
         notifyChanges()
     }
 
-    fun getDetailsById(id: Long): Task<UserDetails> = DefaultTask {
+    fun getDetailsById(id: Long): Task<UserDetails> = CallableTask {
         val user: User = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
-        return@DefaultTask UserDetails(
+        return@CallableTask UserDetails(
             user,
             Faker.instance().lorem().paragraphs(3).joinToString(separator = "\n\n")
         )

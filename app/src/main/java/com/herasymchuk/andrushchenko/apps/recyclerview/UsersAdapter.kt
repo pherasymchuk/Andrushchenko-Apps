@@ -21,6 +21,12 @@ interface UserActionListener {
     fun onUserFire(user: User)
 }
 
+/**
+Callback for calculating the diff between two lists of [UserListViewModel.UserListItem] for use with [DiffUtil].
+
+@param oldList The old list of users.
+@param newList The new list of users.
+ */
 class UsersDiffCallback(
     private val oldList: List<UserListViewModel.UserListItem>,
     private val newList: List<UserListViewModel.UserListItem>,
@@ -49,6 +55,14 @@ class UsersAdapter(
         }
     }
 
+    /**
+     * A class that represents a list of users.
+     *
+     * @property users A list of [UserListViewModel.UserListItem] objects.
+     * @property size The number of users in the list.
+     * @property lastIndex The index of the last user in the list.
+     * @property onUsersUpdated A callback that is invoked when the users in the list are updated.
+     */
     class UserList {
         private var users: List<UserListViewModel.UserListItem> = emptyList()
 
@@ -89,6 +103,17 @@ class UsersAdapter(
 
     override fun getItemCount(): Int = users.size
 
+    /**
+    Binds the data to the [UsersViewHolder] at the specified position.
+
+    - Sets the user's name, company, and photo.
+    - Sets the tag of the `itemView` and `moreImageViewButton` to the corresponding [UserListViewModel.UserListItem].
+    - Shows or hides the progress bar and `moreImageViewButton` depending on the `inProgress` state of the [UserListViewModel.UserListItem].
+    - Sets the `root` view's click listener to the adapter if the item is not in progress.
+
+    @param holder The [UsersViewHolder] to bind the data to.
+    @param position The position of the item in the list.
+     */
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
         val userListItem: UserListViewModel.UserListItem = users[position]
         holder.itemView.tag = userListItem
@@ -96,27 +121,20 @@ class UsersAdapter(
 
         with(holder.binding) {
             userNameTextView.text = user.name
-            moreImageViewButton.tag = userListItem
-
-            if (userListItem.inProgress) {
-                moreImageViewButton.visibility = View.INVISIBLE
-                itemProgressBar.visibility = View.VISIBLE
-                root.setOnClickListener(null)
-            } else {
-                moreImageViewButton.visibility = View.VISIBLE
-                itemProgressBar.visibility = View.GONE
-                root.setOnClickListener(this@UsersAdapter)
-            }
-
             userCompanyTextView.text = user.company
-            if (user.photo.isNotBlank()) {
-                Glide.with(photoImageView.context).load(user.photo).circleCrop()
-                    .placeholder(R.drawable.ic_user_avatar).error(R.drawable.ic_user_avatar)
-                    .into(photoImageView)
-            } else {
-                Glide.with(photoImageView.context).clear(photoImageView)
-                photoImageView.setImageResource(R.drawable.ic_user_avatar)
-            }
+
+            Glide.with(photoImageView.context)
+                .load(user.photo.ifBlank { null }) // Load image only if URL is available
+                .circleCrop()
+                .placeholder(R.drawable.ic_user_avatar)
+                .error(R.drawable.ic_user_avatar)
+                .into(photoImageView)
+
+            val isLoading = userListItem.inProgress
+            moreImageViewButton.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
+            itemProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            root.setOnClickListener(if (isLoading) null else this@UsersAdapter)
+            moreImageViewButton.tag = userListItem
         }
     }
 
