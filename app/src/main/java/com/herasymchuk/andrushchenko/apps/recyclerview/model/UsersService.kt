@@ -2,19 +2,26 @@ package com.herasymchuk.andrushchenko.apps.recyclerview.model
 
 import com.github.javafaker.Faker
 import com.herasymchuk.andrushchenko.apps.recyclerview.UserNotFoundException
+import com.herasymchuk.andrushchenko.apps.recyclerview.tasks.DefaultTask
+import com.herasymchuk.andrushchenko.apps.recyclerview.tasks.Task
 import java.util.Collections
 
 fun interface UsersListener {
-    fun onUsersUpdated(users: List<User>)
+    fun invoke(users: List<User>)
 }
 
 class UsersService {
 
     private var users = mutableListOf<User>()
+    private var loaded = false
 
     private val listeners = mutableSetOf<UsersListener>()
 
     init {
+        loadUsers()
+    }
+
+    private fun loadUsers(): Task<Unit> = DefaultTask {
         val faker = Faker.instance()
         IMAGES.shuffle()
         users = (1..100).map {
@@ -25,9 +32,11 @@ class UsersService {
                 company = faker.company().name()
             )
         }.toMutableList()
+        loaded = true
+        notifyChanges()
     }
 
-    fun deleteUser(user: User) {
+    fun deleteUser(user: User): Task<Unit> = DefaultTask {
         val indexToRemove = users.indexOfFirst { it.id == user.id }
         if (indexToRemove != -1) {
             users = ArrayList(users)
@@ -36,28 +45,28 @@ class UsersService {
         notifyChanges()
     }
 
-    fun moveUser(user: User, moveBy: Int) {
+    fun moveUser(user: User, moveBy: Int): Task<Unit> = DefaultTask {
         val oldIndex = users.indexOfFirst { it.id == user.id }
-        if (oldIndex == -1) return
+        if (oldIndex == -1) return@DefaultTask
         val newIndex = oldIndex + moveBy
-        if (newIndex < 0 || newIndex > users.lastIndex) return
+        if (newIndex < 0 || newIndex > users.lastIndex) return@DefaultTask
         users = ArrayList(users)
         Collections.swap(users, oldIndex, newIndex)
         notifyChanges()
     }
 
-    fun fireUser(user: User) {
+    fun fireUser(user: User) = DefaultTask {
         val index: Int = users.indexOfFirst { it.id == user.id }
-        if (index == -1) return
+        if (index == -1) return@DefaultTask
         val updatedUser = user.copy(company = "")
         users = ArrayList(users)
         users[index] = updatedUser
         notifyChanges()
     }
 
-    fun getDetailsById(id: Long): UserDetails {
-        val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
-        return UserDetails(
+    fun getDetailsById(id: Long): Task<UserDetails> = DefaultTask {
+        val user: User = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
+        return@DefaultTask UserDetails(
             user,
             Faker.instance().lorem().paragraphs(3).joinToString(separator = "\n\n")
         )
@@ -65,7 +74,9 @@ class UsersService {
 
     fun addListener(listener: UsersListener) {
         listeners.add(listener)
-        listener.onUsersUpdated(users)
+        if (loaded) {
+            listener.invoke(users)
+        }
     }
 
     fun removeListener(listener: UsersListener) {
@@ -73,7 +84,8 @@ class UsersService {
     }
 
     private fun notifyChanges() {
-        listeners.forEach { it.onUsersUpdated(users) }
+        if (!loaded) return
+        listeners.forEach { it.invoke(users) }
     }
 
     companion object {
