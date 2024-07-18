@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.0"
+agp = "8.5.1"
 fragmentKtx = "1.8.1"
 javafaker = "1.0.2"
 junitJupiter = "5.10.3"
